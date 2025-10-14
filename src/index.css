@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: mainFont500;
+  src: url(../src/assets/fonts/Lausanne-500.woff2);
+}
+
+@font-face {
+  font-family: mainFont300;
+  src: url(../src/assets/fonts/Lausanne-300.woff2);
+}
+
 body{
   background-color: black
 }
