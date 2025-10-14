@@ -20,4 +20,4 @@ npm install
 npm run dev
 
 ```
-Then open HTTP://localhost:5173 (or whichever port) to view the app.
+Then open http://localhost:5173 (or whichever port) to view the app.
