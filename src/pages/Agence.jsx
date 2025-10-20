@@ -10,7 +10,6 @@ const Agence = () => {
   const imageRef = useRef(null);
 
   const imageArray = [
-
     "../src/assets/images/k72-agence-1.jpg",
     "../src/assets/images/k72-agence-2.jpg",
     "../src/assets/images/k72-agence-3.jpg",
@@ -29,13 +28,19 @@ const Agence = () => {
   ];
 
   useGSAP(function () {
-    gsap.from(imageDivRef.current, {
+    gsap.to(imageDivRef.current, {
       scrollTrigger: {
         trigger: imageDivRef.current,
         start: "top 29%",
         end: "top -100%",
         scrub: true,
         pin: true,
+        pinSpacing: true,
+        pinReparent: true,
+        pinType: 'transform',
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (elem) => {
           let imageIndex;
           if (elem.progress < 1) {
@@ -43,7 +48,6 @@ const Agence = () => {
           } else {
             imageIndex = imageArray.length - 1;
           }
-
           imageRef.current.src = imageArray[imageIndex];
         },
       },
@@ -51,7 +55,7 @@ const Agence = () => {
   });
   return (
     <div>
-      <div className="section1">
+      <div className="section1 relative py-1" >
         <div
           ref={imageDivRef}
           className="h-[20vw] w-[15vw] absolute top-70 left-[30vw] "
