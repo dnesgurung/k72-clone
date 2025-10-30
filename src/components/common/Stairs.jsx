@@ -48,7 +48,6 @@ const Stairs = (props) => {
     [currentPath]
   );
 
-  console.log(props);
   return (
     <div>
       <div ref={stairParentRef} className="h-screen w-full fixed z-20 top-0">
