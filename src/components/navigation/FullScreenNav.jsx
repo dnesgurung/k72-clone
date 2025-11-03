@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 const FullScreenNav = () => {
-  const fullNavLinksRef = useRef(null)
+  const fullNavLinksRef = useRef(null);
+
+
 
   useGSAP(function () {
     const tl = gsap.timeline();
@@ -16,21 +18,21 @@ const FullScreenNav = () => {
       },
     });
     tl.from(fullNavLinksRef.current, {
-        opacity: 0
-    })
-    tl.from('.link', {
-        opacity: 0,
-        rotateX: 90,
-            stagger: {
+      opacity: 0,
+    });
+    tl.from(".link", {
+      opacity: 0,
+      rotateX: 90,
+      stagger: {
         amount: -0.25,
       },
-    })
+    });
   });
 
   return (
     <div
       id="fullScreenNav"
-      className="overflow-hidden h-screen  w-full absolute z-50"
+      className="fullScreenNav hidden overflow-hidden h-screen  w-full absolute z-50"
     >
       <div className="h-screen w-full fixed ">
         <div className="h-full w-full flex">
@@ -42,7 +44,7 @@ const FullScreenNav = () => {
         </div>
       </div>
 
-      <div ref={fullNavLinksRef} id="nav-menu">
+      <div ref={fullNavLinksRef} id="nav-menu" className="relative">
         <div id="k72-logo" className="flex w-full justify-between items-start">
           <div className="p-3">
             <div className=" w-31">
