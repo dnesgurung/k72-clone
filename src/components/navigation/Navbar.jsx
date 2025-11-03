@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const Navbar = () => {
+
+  const navGreenRef = useRef(null)
+  const burgerSignRef = useRef(null)
   return (
     <div className="z-4 flex fixed top-0 w-full items-start justify-between">
       <div className="p-3">
@@ -22,18 +25,28 @@ const Navbar = () => {
       <div
         onMouseEnter={() => {
           navGreenRef.current.style.height = "100%";
+          burgerSignRef.current.querySelectorAll("div").forEach((bar)=> {
+            bar.style.background = "black"
+          })
+ 
         }}
         onMouseLeave={() => {
           navGreenRef.current.style.height = "0%";
+            burgerSignRef.current.querySelectorAll("div").forEach((bar)=> {
+            bar.style.background = "white"
+          })
         }}
-        className="h-13 bg-black relative w-[15vw]"
+        className="h-[52px] bg-black relative w-[15vw]"
       >
         <div
           ref={navGreenRef}
-          className="bg-[#d3fd50] transition-all absolute top-0 h-0 w-full"
+          className="bg-[#d3fd50] transition-all duration-300 absolute top-0 h-0 w-full"
         ></div>
 
-        <div className="relative"></div>
+        <div ref={burgerSignRef} className="relative h-full px-8 flex flex-col justify-center items-end gap-1">
+          <div className="w-13 h-0.5 bg-white"></div>
+          <div className="w-7 h-0.5 bg-white"></div>
+        </div>
       </div>
     </div>
   );
