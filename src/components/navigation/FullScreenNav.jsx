@@ -1,51 +1,69 @@
 import React, { useContext, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { NavbarContext } from "../../context/NavContext";
 
 const FullScreenNav = () => {
   const fullNavLinksRef = useRef(null);
 
+  const fullScreenRef = useRef(null);
 
+  const [navOpen, setNavOpen] = useContext(NavbarContext);
 
-  useGSAP(function () {
+  function gsapAnimation() {
     const tl = gsap.timeline();
 
-    tl.from(".stairs", {
-      delay: 1,
+    tl.from(".stairing", {
+      delay: 0.5,
       height: 0,
       stagger: {
         amount: -0.25,
       },
     });
-    tl.from(fullNavLinksRef.current, {
-      opacity: 0,
-    });
+
     tl.from(".link", {
       opacity: 0,
       rotateX: 90,
       stagger: {
-        amount: -0.25,
+        amount: 0.3,
       },
     });
-  });
+    tl.from('.navlink', {
+        opacity: 0
+    })
+  }
+
+  useGSAP(function () {
+    if (navOpen) {
+        gsap.to('.fullScreenNav', {
+            display: 'block'
+        })
+      gsapAnimation()
+    } else {
+        gsap.to('.fullScreenNav', {
+            display: 'none'
+        })
+    }
+  }, [navOpen]);
 
   return (
     <div
       id="fullScreenNav"
-      className="fullScreenNav hidden overflow-hidden h-screen  w-full absolute z-50"
+      ref={fullScreenRef}
+      className="fullScreenNav overflow-hidden h-screen  w-full absolute z-50"
     >
       <div className="h-screen w-full fixed ">
         <div className="h-full w-full flex">
-          <div className="stairs h-full w-1/5 bg-black"></div>
-          <div className="stairs h-full w-1/5 bg-black"></div>
-          <div className="stairs h-full w-1/5 bg-black"></div>
-          <div className="stairs h-full w-1/5 bg-black"></div>
-          <div className="stairs h-full w-1/5 bg-black"></div>
+          <div className="stairing h-full w-1/5 bg-black"></div>
+          <div className="stairing h-full w-1/5 bg-black"></div>
+          <div className="stairing h-full w-1/5 bg-black"></div>
+          <div className="stairing h-full w-1/5 bg-black"></div>
+          <div className="stairing h-full w-1/5 bg-black"></div>
         </div>
       </div>
 
       <div ref={fullNavLinksRef} id="nav-menu" className="relative">
-        <div id="k72-logo" className="flex w-full justify-between items-start">
+        <div id="k72-logo" className="navlink flex w-full justify-between items-start">
           <div className="p-3">
             <div className=" w-31">
               <svg
@@ -64,6 +82,7 @@ const FullScreenNav = () => {
         </div>
 
         <div
+          onClick={() => setNavOpen(false)}
           id="cross-logo"
           className="h-30 w-30 absolute top-3 right-2 cursor-pointer "
         >
